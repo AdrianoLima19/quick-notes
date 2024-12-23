@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "sanitize.css": "^13.0.0",
+    "sass-embedded": "^1.81.1",
+    "vite": "^6.0.2"
+  }
+}

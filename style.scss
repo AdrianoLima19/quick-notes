@@ -1,0 +1,554 @@
+@forward "sanitize.css/assets.css";
+@forward "sanitize.css/reduce-motion.css";
+@forward "sanitize.css/typography.css";
+@forward "sanitize.css/system-ui.css";
+@forward "sanitize.css/ui-monospace.css";
+@forward "sanitize.css/forms.css";
+@forward "sanitize.css/sanitize.css";
+
+$background-color: #edefee;
+$text-color: #3a3a41;
+$title-color: #1f1f23;
+$inline-margin: 4vw;
+
+$colors: (
+  blue: #c0cde2,
+  green: #bdccbc,
+  orange: #dbb3a2,
+  purple: #b3a4bc,
+  yellow: #e3d5b1,
+);
+
+html {
+  width: 100%;
+  height: 100%;
+  background-color: $background-color;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  background-color: $background-color;
+  color: $text-color;
+  fill: $text-color;
+
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+}
+
+header {
+  menu {
+    list-style: none;
+    padding-inline: $inline-margin;
+    padding-block: 3.2vh 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+      gap: 1.76rem;
+
+      .options {
+        margin-left: auto;
+      }
+    }
+
+    .title {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0 0.84rem;
+
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 3.2rem;
+        font-weight: 400;
+        color: $title-color;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        anchor-name: --tooltip-btn;
+
+        svg {
+          width: 1.28rem;
+          height: auto;
+          color: $title-color;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .options {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.32rem 1.96rem;
+
+      .search-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $text-color;
+        border-radius: 12px;
+        padding: 0.24rem 0.32rem;
+
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-left: 0.28rem;
+
+          svg {
+            width: 0.96rem;
+            color: $title-color;
+          }
+        }
+
+        input {
+          font-size: 0.96rem;
+          border: none;
+          padding-block: 0;
+          padding-inline: 0.36rem 0;
+          margin: 0;
+          margin-left: 0.36rem;
+          outline: none;
+          border-left: 1px solid $title-color;
+        }
+      }
+
+      li:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          border-radius: 100%;
+          border: none;
+          cursor: pointer;
+
+          svg {
+            padding: 0.12rem;
+            width: 2.44rem;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  ul {
+    margin: 0;
+    padding-top: 76px;
+    padding-inline: $inline-margin;
+    padding-bottom: calc(76px * 0.75);
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 325px));
+    gap: 2.4rem 1.92rem;
+    justify-content: start;
+
+    .note {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      border-radius: 16px;
+      padding: 20px 16px 12px 16px;
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 4;
+      gap: 0;
+      border: 1px solid lighten($text-color, 8%);
+      background-color: darken($background-color, 2.4%);
+
+      h2 {
+        min-height: 2.64ch;
+        margin: 0;
+        padding: 0;
+        font-size: 1.44rem;
+        font-weight: 400;
+        color: $title-color;
+      }
+
+      hr {
+        padding: 0;
+        margin: 0;
+        margin-block: 0.76rem 0;
+        width: 100%;
+        border: 1px inset rgba($text-color, 0.88);
+      }
+
+      p {
+        min-height: 2.64ch;
+        font-size: 1rem;
+        font-weight: 400;
+        text-align: left;
+        margin-top: 0;
+      }
+
+      p,
+      h2 {
+        &[contenteditable] {
+          cursor: text;
+
+          &:focus {
+            outline: 1px solid $text-color;
+            outline-offset: 4px;
+            border-radius: 4px;
+          }
+
+          &:empty:before {
+            color: rgba($text-color, 0.76);
+          }
+
+          * {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal !important;
+          }
+        }
+      }
+
+      h2:empty:before {
+        content: "Sem título";
+        color: rgba($text-color, 0.8);
+      }
+
+      p:empty:before {
+        content: "Adicione uma descrição...";
+        color: rgba($text-color, 0.72);
+      }
+
+      button {
+        margin: 0;
+        padding: 6px 8px;
+        border-radius: 100%;
+        width: 2.24rem;
+        height: 2.24rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: $text-color;
+        color: $background-color;
+
+        svg {
+          padding: 0;
+          margin: 0;
+          color: $background-color;
+        }
+      }
+
+      .footer {
+        grid-row: 4/5;
+        grid-column: 1/-1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+          font-weight: 300;
+          color: $title-color;
+          font-size: 0.88rem;
+        }
+      }
+
+      .menu {
+        position: absolute;
+        display: none;
+        align-items: center;
+        justify-content: space-evenly;
+        bottom: 12px;
+        right: 16px;
+        gap: 0.76rem;
+      }
+
+      .colors {
+        position: absolute;
+        bottom: 52px;
+        right: 16px;
+        display: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 0 0.76rem;
+
+        button {
+          background-color: $background-color;
+
+          @each $name, $color in $colors {
+            &[option="#{'' + $name}"] {
+              background-color: $color;
+              border-color: darken($color, 16%);
+            }
+          }
+        }
+      }
+
+      .delete {
+        display: none;
+      }
+
+      &[editing] {
+        outline: 1px solid $title-color;
+        // border-color: transparent !important;
+
+        .footer button {
+          visibility: none;
+          user-select: none;
+        }
+
+        .menu {
+          display: flex;
+        }
+      }
+
+      &[palette] {
+        .menu button:nth-child(2) {
+          background-color: lighten($text-color, 16%);
+        }
+
+        .colors {
+          display: flex;
+        }
+      }
+
+      &[popover] {
+        .delete {
+          position: absolute;
+          inset: unset;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(black, 0.56);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .dialog {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: $text-color;
+            border: 1px solid $background-color;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: $background-color;
+
+            .group {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: center;
+
+              &:last-child {
+                gap: 0.32rem 1.76rem;
+                padding-top: 1.16rem;
+              }
+            }
+
+            h3 {
+              padding: 0;
+              margin: 0;
+              padding-block: 0.32em 0.96em;
+              color: lighten($background-color, 4%);
+              font-size: 1.24rem;
+            }
+
+            input {
+              width: 0.96rem;
+            }
+
+            label {
+              font-size: 1.08rem;
+              padding-left: 0.36em;
+            }
+
+            button {
+              border-radius: 4px;
+              width: unset;
+              height: unset;
+              padding-inline: 0.76em;
+
+              &:first-child {
+                background-color: darken(rgb(233, 22, 22), 8%);
+                border-color: darken(rgb(233, 22, 22), 16%);
+
+                &:hover {
+                  background-color: darken(rgb(233, 22, 22), 4%);
+                }
+              }
+
+              &:last-child {
+                background-color: darken(rgb(22, 22, 233), 8%);
+                border-color: darken(rgb(22, 22, 233), 16%);
+
+                &:hover {
+                  background-color: darken(rgb(22, 22, 233), 4%);
+                }
+              }
+
+              &[disabled] {
+                background-color: darken($background-color, 24%);
+                border-color: $title-color;
+                color: $text-color;
+                cursor: default !important;
+
+                &:hover {
+                  background-color: darken($background-color, 24%);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @each $name, $color in $colors {
+        &.#{"" + $name} {
+          background-color: $color;
+          border-color: darken($color, 16%);
+
+          button[option="#{'' + $name}"] {
+            user-select: none;
+            position: relative;
+            cursor: auto;
+
+            &::before {
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background-color: rgba($title-color, 0.16);
+              border-radius: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tooltip-menu {
+  position-anchor: --tooltip-btn;
+  position-try-fallbacks: --left;
+  position: absolute;
+  margin: 0;
+  padding: 12px 16px;
+  inset: auto;
+  top: anchor(bottom);
+  left: anchor(right);
+  border: 2px solid $title-color;
+  border-radius: 8px;
+  outline: none;
+  background-color: $text-color;
+  color: $background-color;
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    p {
+      margin: 0;
+      padding: 0;
+      padding-bottom: 0.16em;
+      color: darken($background-color, 8%);
+      white-space: pre;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+
+      input {
+        display: none;
+
+        &:checked {
+          & + .custom-input::after {
+            left: 50%;
+          }
+
+          & + .custom-input {
+            background: #9fd6ae;
+          }
+
+          & ~ .hint::before {
+            content: "Ativado";
+          }
+        }
+      }
+
+      .custom-input {
+        position: relative;
+        width: 2em;
+        height: 1.12em;
+        background: #f0f0f0;
+        border-radius: 2em;
+        padding: 2px;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.4s ease;
+
+        &:after,
+        &:before {
+          position: relative;
+          display: block;
+          content: "";
+          width: 50%;
+          height: 100%;
+        }
+
+        &:after {
+          left: 0;
+          border-radius: 50%;
+          background: #fff;
+          transition: all 0.2s ease;
+        }
+
+        &:before {
+          display: none;
+        }
+      }
+
+      .hint {
+        padding-left: 0.32em;
+        cursor: pointer;
+
+        &::before {
+          content: "Desativado";
+        }
+      }
+    }
+  }
+}
+
+@position-try --left {
+  inset: unset;
+  top: anchor(bottom);
+  right: anchor(left);
+}
